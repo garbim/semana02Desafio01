@@ -22,8 +22,8 @@ class CreateTransactionService {
 
   public execute({ title, type, value }: Request): Transaction {
     if (type === 'outcome') {
-      const balance = this.transactionsRepository.getBalance();
-      if (balance.total - value < 0) {
+      const { total } = this.transactionsRepository.getBalance();
+      if (total - value < 0) {
         throw Error('Outcome transaction without a valid balance');
       }
     }
